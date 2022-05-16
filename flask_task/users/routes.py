@@ -40,6 +40,7 @@ def get_all_users():
 @users.route('/user/new', methods=['POST'])
 def new_user():
     data = request.get_json()
+    print(data)
     new_user = User(name=data['name'], email=data['email'], password=data['password'])
     db.session.add(new_user)
     db.session.commit()

@@ -34,7 +34,7 @@ def get_all_posts():
 # ===================================== POST REQUESTS ROUTES ===========================================
 
 @posts.route('/post/new', methods=['POST'])
-def new_user():
+def new_post():
     data = request.get_json()
     new_post = Post(title=data['title'], content=data['content'])
     db.session.add(new_post)

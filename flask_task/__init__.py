@@ -1,5 +1,4 @@
 # Imports
-from django.apps import apps
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -10,8 +9,10 @@ app.config["SECRET_KEY"] = 'b6b4735224de8d561a0878b88a498729'
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # setup Db
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
-    os.path.join(basedir, 'db.sqlite')
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+#     os.path.join(basedir, 'db.sqlite')
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/mysite'
 # Init Db
 db = SQLAlchemy(app)
 
