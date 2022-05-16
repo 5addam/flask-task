@@ -44,6 +44,7 @@ def new_user():
     new_user = User(name=data['name'], email=data['email'], password=data['password'])
     db.session.add(new_user)
     db.session.commit()
+    db.session.remove()
 
     return jsonify({'message': 'New User Created!!'})
 

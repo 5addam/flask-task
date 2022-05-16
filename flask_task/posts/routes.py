@@ -39,6 +39,7 @@ def new_post():
     new_post = Post(title=data['title'], content=data['content'])
     db.session.add(new_post)
     db.session.commit()
+    db.session.remove()
 
     return jsonify({'message': 'New Post Created!!'})
 
