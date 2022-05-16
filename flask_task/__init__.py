@@ -10,8 +10,12 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 # setup Db
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/mysite'
+app.config['SQLALCHEMY_POOL_SIZE'] = 100
+app.config['SQLALCHEMY_MAX_OVERFLOW'] = 0
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 50
+app.config['SQLALCHEMY_POOL_TIMEOUT'] = 300
 # Init Db
-db = SQLAlchemy(app)
+db = SQLAlchemy(app, session_options={'autocommit': True})
 
 
 # Blueprints

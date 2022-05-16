@@ -11,15 +11,13 @@ users = Blueprint('users', __name__)
 def init_db():
     db.create_all()
 
-
-# @users.route('/user/new', methods=['GET'])
-# def user():
-#     return jsonify({'message': 'Route is working...'})
-
 # ===================================== GET REQUESTS ROUTES =================================================
 @users.route('/user/all', methods=['GET'])
 def get_all_users():
-    all_users_list = User.query.order_by(User.date_joined.desc())
+    # all_users_list = db.session.query(User).order_by(User.date_joined.desc())
+    all_users_list = db.session.query(User).all()
+    # all_users_list = User.query.all()
+    db.session.remove()
     
     users = []
     for user in all_users_list:
@@ -42,6 +40,7 @@ def new_user():
     data = request.get_json()
     print(data)
     new_user = User(name=data['name'], email=data['email'], password=data['password'])
+    db.session.begin()
     db.session.add(new_user)
     db.session.commit()
     db.session.remove()
